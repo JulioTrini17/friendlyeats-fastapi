@@ -276,6 +276,29 @@ La estructura representa las responsabilidades principales del backend, la inter
 
 **Sprint 1:** funcionalidades principales del CRUD, interfaz web, conexión con Firestore Emulator, carga de datos de ejemplo y pruebas automatizadas.
 
+## Capturas de pantalla
+
+### Página principal
+
+![Página principal de FriendlyEats](screenshots/inicio.png)
+
+### Filtros de restaurantes
+
+![Filtros de restaurantes](screenshots/filtros.png)
+
+### Registro de restaurantes
+
+![Formulario de registro](screenshots/registro.png)
+
+### Detalle de restaurante
+
+![Detalle de restaurante](screenshots/detalle.png)
+
+### Documentación de la API
+
+![Documentación Swagger](screenshots/api.png)
+
+
 ## Autor
 
 **Julio Cesar Trinidad Garcaa**
