@@ -1,0 +1,65 @@
+
+{% extends "base.html" %}
+
+{% block title %}{{ restaurant.name }} | FriendlyEats{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="/">Restaurantes</a>
+    <span>/</span>
+    <span>{{ restaurant.name }}</span>
+</div>
+
+<section class="detail-layout">
+    <div class="detail-photo">
+        {% if restaurant.photoUrl %}
+        <img src="{{ restaurant.photoUrl }}" alt="Fotografía de {{ restaurant.name }}">
+        {% else %}
+        <div class="photo-placeholder detail-placeholder">
+            <span>{{ restaurant.name[0] | upper }}</span>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="detail-content">
+        <p class="eyebrow">DESCUBRE EL LUGAR</p>
+        <h1>{{ restaurant.name }}</h1>
+
+        <p class="detail-category">{{ restaurant.category }}</p>
+        <p class="restaurant-city">{{ restaurant.city }}</p>
+
+        <div class="detail-rating">
+            <span class="rating-star" aria-hidden="true">★</span>
+            <strong>{{ "%.1f"|format(restaurant.avgRating) }}</strong>
+            <span class="rating-muted">
+                · {{ restaurant.numRatings }} reseñas
+            </span>
+        </div>
+
+        <div class="detail-price">
+            <span>Precio</span>
+            <strong>{{ "$" * restaurant.price }}</strong>
+        </div>
+
+        <div class="detail-actions">
+            <a
+                class="button"
+                href="/restaurants/{{ restaurant.id }}/edit"
+            >
+                Editar restaurante
+            </a>
+
+            <button
+                class="button button-danger"
+                type="button"
+                data-delete-id="{{ restaurant.id }}"
+                data-delete-name="{{ restaurant.name }}"
+            >
+                Eliminar
+            </button>
+        </div>
+
+        <a class="text-link back-link" href="/">← Volver al catálogo</a>
+    </div>
+</section>
+{% endblock %}

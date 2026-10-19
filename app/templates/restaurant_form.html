@@ -1,0 +1,113 @@
+
+{% extends "base.html" %}
+
+{% if restaurant %}
+    {% set page_heading = "Editar restaurante" %}
+    {% set page_description = "Actualiza la información del lugar." %}
+{% else %}
+    {% set page_heading = "Agrega un restaurante" %}
+    {% set page_description = "Incluye un nuevo lugar en nuestro catálogo." %}
+{% endif %}
+
+{% block title %}{{ page_heading }} | FriendlyEats{% endblock %}
+
+{% block content %}
+<div class="form-page">
+    <a class="text-link back-link" href="/">← Volver al catálogo</a>
+
+    <div class="form-heading">
+        <p class="eyebrow">FRIENDLYEATS</p>
+        <h1>{{ page_heading }}</h1>
+        <p>{{ page_description }}</p>
+    </div>
+
+    <form
+        id="restaurant-form"
+        class="restaurant-form"
+        data-restaurant-id="{{ restaurant.id if restaurant else '' }}"
+    >
+        <div class="field">
+            <label for="name">Nombre del restaurante *</label>
+            <input
+                id="name"
+                name="name"
+                type="text"
+                minlength="2"
+                maxlength="100"
+                required
+                value="{{ restaurant.name if restaurant else '' }}"
+                placeholder="Ej. La Casa del Sabor"
+            >
+        </div>
+
+        <div class="form-row">
+            <div class="field">
+                <label for="category">Categoría *</label>
+                <input
+                    id="category"
+                    name="category"
+                    type="text"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                    value="{{ restaurant.category if restaurant else '' }}"
+                    placeholder="Ej. Mexicana"
+                >
+            </div>
+
+            <div class="field">
+                <label for="city">Ciudad *</label>
+                <input
+                    id="city"
+                    name="city"
+                    type="text"
+                    minlength="2"
+                    maxlength="80"
+                    required
+                    value="{{ restaurant.city if restaurant else '' }}"
+                    placeholder="Ej. Puebla"
+                >
+            </div>
+        </div>
+
+        <div class="field">
+            <label for="price">Rango de precio *</label>
+            <select id="price" name="price" required>
+                <option value="">Selecciona un rango</option>
+                <option value="1" {% if restaurant and restaurant.price == 1 %}selected{% endif %}>
+                    $ · Económico
+                </option>
+                <option value="2" {% if restaurant and restaurant.price == 2 %}selected{% endif %}>
+                    $$ · Moderado
+                </option>
+                <option value="3" {% if restaurant and restaurant.price == 3 %}selected{% endif %}>
+                    $$$ · Alto
+                </option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="photoUrl">URL de la fotografía (opcional)</label>
+            <input
+                id="photoUrl"
+                name="photoUrl"
+                type="url"
+                value="{{ restaurant.photoUrl if restaurant and restaurant.photoUrl else '' }}"
+                placeholder="https://ejemplo.com/fotografia.jpg"
+            >
+            <p class="field-help">
+                Introduce un enlace directo a una imagen. No se suben archivos.
+            </p>
+        </div>
+
+        <p class="form-message" id="form-message" role="status" hidden></p>
+
+        <div class="form-actions">
+            <button class="button" type="submit">
+                {{ "Guardar cambios" if restaurant else "Crear restaurante" }}
+            </button>
+            <a class="button button-secondary" href="/">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
